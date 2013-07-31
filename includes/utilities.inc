@@ -256,8 +256,8 @@ function islandora_get_namespace($id) {
  */
 function islandora_namespace_accessible($id) {
   if (variable_get('islandora_namespace_restriction_enforced', FALSE)) {
-    $namespace = islandora_get_namespace($id) . ':';
-    $allowed_namespaces = explode(" ", variable_get('islandora_pids_allowed', 'default: demo: changeme: islandora: ilives: islandora-book: books: newspapers: '));
+    $namespace = islandora_get_namespace($id);
+    $allowed_namespaces = islandora_get_allowed_namespaces();
     return in_array($namespace, $allowed_namespaces);
   }
   return TRUE;
@@ -389,7 +389,7 @@ function islandora_get_datastreams_requirements_from_models(array $models) {
  *     - "optional": A boolean indicating if the given stream is optional.
  */
 function islandora_get_datastreams_requirements_from_content_model(AbstractObject $object) {
-  if (empty($object[DS_COMP_STREAM])) {
+  if (empty($object[DS_COMP_STREAM]) || !islandora_datastream_access(FEDORA_VIEW_OBJECTS, $object[DS_COMP_STREAM])) {
     return array();
   }
   $xml = new SimpleXMLElement($object[DS_COMP_STREAM]->content);
@@ -636,6 +636,9 @@ function islandora_system_settings_form_default_value($name, $default_value, arr
  *       is optional.
  */
 function islandora_get_comp_ds_mappings($pid) {
+  $message = islandora_deprecated('7.x-1.2', t('Refactor to use the more flexible islandora_get_datastreams_requirements_from_content_model().'));
+  trigger_error(filter_xss($message), E_USER_DEPRECATED);
+
   $cm_object = islandora_object_load($pid);
   if (!isset($cm_object) || !isset($cm_object['DS-COMPOSITE-MODEL'])) {
     return FALSE;
@@ -670,6 +673,9 @@ function islandora_get_comp_ds_mappings($pid) {
  *   TRUE if the account has all the given permissions, FALSE otherwise.
  */
 function islandora_user_access_all(array $perms, $account = NULL) {
+  $message = islandora_deprecated('7.x-1.2', 'Roll your own code or use islandora_user_access().');
+  trigger_error(filter_xss($message), E_USER_DEPRECATED);
+
   foreach ($perms as $perm) {
     if (!user_access($perm, $account)) {
       return FALSE;
@@ -691,6 +697,9 @@ function islandora_user_access_all(array $perms, $account = NULL) {
  *   otherwise.
  */
 function islandora_user_access_any(array $perms, $account = NULL) {
+  $message = islandora_deprecated('7.x-1.2', 'Roll your own code or use islandora_user_access().');
+  trigger_error(filter_xss($message), E_USER_DEPRECATED);
+
   foreach ($perms as $perm) {
     if (user_access($perm, $account)) {
       return TRUE;
@@ -709,7 +718,13 @@ function islandora_get_allowed_namespaces() {
   $matches = array();
   $allowed_namespaces = variable_get('islandora_pids_allowed', 'default: demo: changeme: islandora:');
   preg_match_all('/([A-Za-z0-9-\.]+):/', $allowed_namespaces, $matches);
-  return $matches[1];
+  $accessible_namespaces = $matches[1];
+  // Ensure that the "islandora" namespace is explicitly allowed
+  // no matter what happens.
+  if (!in_array('islandora', $accessible_namespaces)) {
+    $accessible_namespaces[] = 'islandora';
+  }
+  return $accessible_namespaces;
 }
 
 /**
@@ -825,7 +840,7 @@ function islandora_content_model_select_table_form_element($drupal_variable, $de
  *
  * @code
  *   $message = islandora_deprecated('7.x-1.1', t('Use more cowbell.'))
- *   trigger_error(check_plain($message), E_USER_DEPRECATED)
+ *   trigger_error(filter_xss($message), E_USER_DEPRECATED)
  * @endcode
  *
  * @param string $release
@@ -849,4 +864,49 @@ function islandora_deprecated($release, $solution = NULL) {
     $message .= "<br/>\n" . $solution;
   }
   return $message;
+}
+
+/**
+ * Transform recursively-merged array of strings to renderable arrays.
+ *
+ * Renderable arrays are passed-through as-is.
+ *
+ * Previously, functions/hooks like islandora_view_object would return an
+ * associative array with string values containing markup. These values were
+ * then imploded into one large piece of markup. Here, we transform this older
+ * structure which was generated into a renderable array, because renderable
+ * arrays are awesome!
+ *
+ * @param array $markup_array
+ *   An associative array of which the values are either a string or an array
+ *   of strings, which we transform to renderable markup elements (by
+ *   reference).
+ */
+function islandora_as_renderable_array(&$markup_array) {
+  foreach ($markup_array as &$value) {
+    if (!is_array($value)) {
+      // Not a renderable array, just a string. Let's convert it to a
+      // renderable '#markup' element.
+      $value = array(
+        '#markup' => $value,
+      );
+    }
+    elseif (!isset($value['#type']) && !isset($value['#markup'])) {
+      // A simple array--possibly the result of a recursive merge? Let's
+      // look at each, to possibly convert them to a renderable '#markup'
+      // elements.
+      foreach ($value as &$inner) {
+        if (!is_array($inner)) {
+          // If it is an array at this level, we can assume that it is a
+          // renderable array. If it is not an array, convert to a renderable
+          // '#markup' element.
+          $inner = array(
+            '#markup' => $inner,
+          );
+        }
+      }
+      unset($inner);
+    }
+  }
+  unset($value);
 }
