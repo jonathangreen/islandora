@@ -16,20 +16,6 @@ set_include_path(get_include_path() . PATH_SEPARATOR . 'sites/all/libraries/tuqu
 class IslandoraTuque {
 
   /**
-   * Connection to the repository
-   *
-   * @var RepositoryConnection
-   */
-  public $connection = NULL;
-
-  /**
-   * The Fedora API we are using
-   *
-   * @var FedoraAPI
-   */
-  public $api = NULL;
-
-  /**
    * The cache we use to connect.
    *
    * @var SimpleCache
@@ -70,7 +56,8 @@ class IslandoraTuque {
     }
 
     if (self::exists()) {
-      $this->repository = new IslandoraRepositoryDecorator(RepositoryFactory::getRepository('fedora3', new RepositoryConfig($url, $user_string, $pass_string)));
+      $this->cache = new SimpleCache();
+      $this->repository = new IslandoraRepositoryDecorator(RepositoryFactory::getRepository('fedora3', new RepositoryConfig($url, $user_string, $pass_string), $this->cache));
     }
   }
 

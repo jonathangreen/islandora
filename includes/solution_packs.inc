@@ -433,7 +433,8 @@ function islandora_uninstall_solution_pack($module, $force = FALSE) {
   $objects = $required_objects['objects'];
   $filter = function($o) use($connection) {
     $param = "pid={$o->id}";
-    $query = $connection->api->a->findObjects('query', $param);
+    // @todo Fix for FEDORA4.
+    $query = $connection->repository->api->a->findObjects('query', $param);
     return !empty($query['results']);
   };
   $existing_objects = array_filter($objects, $filter);

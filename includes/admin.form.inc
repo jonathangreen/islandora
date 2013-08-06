@@ -99,10 +99,11 @@ function islandora_admin_settings_form_repository_access_message($url) {
   $connection = islandora_get_tuque_connection(NULL, $url);
   if ($connection) {
     try {
-      $info = $connection->api->a->describeRepository();
+      // @todo Fix for FEDORA4.
+      $info = $connection->repository->api->a->describeRepository();
       // If we are able to successfully call API-M::getDatastream, assume we are
       // an authenticated user, as API-M is usally locked down.
-      $dc = $connection->api->m->getDatastream('fedora-system:ContentModel-3.0', 'DC');
+      $dc = $connection->repository->api->m->getDatastream('fedora-system:ContentModel-3.0', 'DC');
     }
     catch (RepositoryException $e) {
       // Ignore, we only testing to see what is accessible.

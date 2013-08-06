@@ -124,7 +124,8 @@ function islandora_describe_repository($url = NULL) {
   $connection = islandora_get_tuque_connection();
   if ($connection) {
     try {
-      $info = $connection->api->a->describeRepository();
+      // @todo Fix for FEDORA4.
+      $info = $connection->repository->api->a->describeRepository();
       return $info;
     }
     catch (RepositoryException $e) {
