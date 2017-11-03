@@ -11,8 +11,13 @@
 /**
  * Dublin Core Class.
  */
+// @codingStandardsIgnoreLine
 class DublinCore {
-
+  /**
+   * Array of items in DC.
+   *
+   * @var array
+   */
   public $dc = array(
     'dc:title' => array(),
     'dc:creator' => array(),
@@ -30,7 +35,6 @@ class DublinCore {
     'dc:coverage' => array(),
     'dc:rights' => array(),
   );
-  public $owner;
 
   /**
    * Constructor.

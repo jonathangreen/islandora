@@ -65,6 +65,7 @@ function islandora_hex2int($hex) {
  * all the test results using getPasses() and getFails() and transforms those
  * into something that DrupalWebTestCase can use.
  */
+// @codingStandardsIgnoreLine
 abstract class DatastreamValidator extends IslandoraTestUtilityClass {
 
   /**
@@ -199,6 +200,7 @@ abstract class DatastreamValidator extends IslandoraTestUtilityClass {
  * of image files can be checked. Please check the documentation for the PHPGD
  * imagecreatefromstring() function to determine what filetypes are valid.
  */
+// @codingStandardsIgnoreLine
 class ImageDatastreamValidator extends DatastreamValidator {
 
   /**
@@ -217,6 +219,7 @@ class ImageDatastreamValidator extends DatastreamValidator {
 /**
  * Asserts the validity of any .tif/.tiff datastream.
  */
+// @codingStandardsIgnoreLine
 class TIFFDatastreamValidator extends DatastreamValidator {
 
   /**
@@ -258,6 +261,7 @@ class TIFFDatastreamValidator extends DatastreamValidator {
 /**
  * Asserts the validity of a JP2 datastream.
  */
+// @codingStandardsIgnoreLine
 class JP2DatastreamValidator extends DatastreamValidator {
 
   /**
@@ -293,6 +297,7 @@ class JP2DatastreamValidator extends DatastreamValidator {
 /**
  * Asserts the validity of a PDF datastream.
  */
+// @codingStandardsIgnoreLine
 class PDFDatastreamValidator extends DatastreamValidator {
 
   /**
@@ -339,6 +344,7 @@ class PDFDatastreamValidator extends DatastreamValidator {
  * is the string we're looking to find in the datastream, and the second is an
  * integer representing the number of times it should appear in the datastream.
  */
+// @codingStandardsIgnoreLine
 class TextDatastreamValidator extends DatastreamValidator {
 
   /**
@@ -383,6 +389,7 @@ class TextDatastreamValidator extends DatastreamValidator {
  * declared chunk sizes against actual sizes. If any of these are off, WAV
  * players will fail to function.
  */
+// @codingStandardsIgnoreLine
 class WAVDatastreamValidator extends DatastreamValidator {
 
   /**
@@ -519,6 +526,7 @@ class WAVDatastreamValidator extends DatastreamValidator {
  * VBR settings. Otherwise, we look for the basic MP3 signature 'fffa' or 'fffb'
  * at the start of the binary.
  */
+// @codingStandardsIgnoreLine
 class MP3DatastreamValidator extends DatastreamValidator {
 
   /**
@@ -610,6 +618,7 @@ class MP3DatastreamValidator extends DatastreamValidator {
  * a four-character filetype code. Here, we look for 'ftyp', and then pass the
  * filetype code to the test message.
  */
+// @codingStandardsIgnoreLine
 class MP4DatastreamValidator extends DatastreamValidator {
 
   /**
@@ -635,6 +644,7 @@ class MP4DatastreamValidator extends DatastreamValidator {
  * one OGG page, and confirming that the file asserts the Theora and Vorbis
  * codecs were used to create the file.
  */
+// @codingStandardsIgnoreLine
 class OGGDatastreamValidator extends DatastreamValidator {
 
   /**
@@ -683,6 +693,7 @@ class OGGDatastreamValidator extends DatastreamValidator {
  * second, we know that the file will contain the declaration 'matroska' soon
  * after.
  */
+// @codingStandardsIgnoreLine
 class MKVDatastreamValidator extends DatastreamValidator {
 
   /**

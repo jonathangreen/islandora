@@ -24,6 +24,7 @@
 /**
  * Class for doing mapping to mimetypes.
  */
+// @codingStandardsIgnoreLine
 class MimeDetect {
   /**
    * This is a shortlist of mimetypes.

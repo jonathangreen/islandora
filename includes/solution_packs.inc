@@ -109,8 +109,8 @@ function islandora_solution_pack_form(array $form, array &$form_state, $solution
   // The order is important in terms of severity of the status, where higher
   // index indicates the status is more serious, this will be used to determine
   // what messages get displayed to the user.
-  $ok_image = theme_image(array('path' => 'misc/watchdog-ok.png', 'attributes' => array()));
-  $warning_image = theme_image(array('path' => 'misc/watchdog-warning.png', 'attributes' => array()));
+  $ok_image = theme('image', array('path' => 'misc/watchdog-ok.png', 'attributes' => array()));
+  $warning_image = theme('image', array('path' => 'misc/watchdog-warning.png', 'attributes' => array()));
   $status_info = array(
     'up_to_date' => array(
       'solution_pack' => t('All required objects are installed and up-to-date.'),
@@ -380,9 +380,6 @@ function islandora_install_solution_pack($module, $op = 'install', $force = FALS
   drupal_load('module', 'islandora');
   module_load_include('inc', 'islandora', 'includes/utilities');
   drupal_load('module', $module);
-  $info_file = drupal_get_path('module', $module) . "/{$module}.info";
-  $info_array = drupal_parse_info_file($info_file);
-  $module_name = $info_array['name'];
   if (!islandora_describe_repository()) {
     $msg = $t('@module: Did not install any objects. Could not connect to the repository. Please check the settings on the !config_link page and install the required objects manually on the !admin_link page.', $t_params);
     drupal_set_message(filter_xss($msg), 'error');

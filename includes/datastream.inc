@@ -132,7 +132,7 @@ function islandora_view_datastream(AbstractDatastream $datastream, $download = F
 function islandora_parse_http_match_headers($header_value) {
   $matches = array();
   // Match the CSV-like structure supported by the HTTP headers.
-  $count = preg_match_all('/(((W\/)?("?)(\*|.+?)\4)(, +)?)/', $header_value, $matches);
+  preg_match_all('/(((W\/)?("?)(\*|.+?)\4)(, +)?)/', $header_value, $matches);
   // The fifth sub-expression/group is which will contain the etags.
   return $matches[5];
 }

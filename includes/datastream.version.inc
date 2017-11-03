@@ -28,7 +28,6 @@ function islandora_datastream_version_table($datastream) {
     $row = array();
     $reponsibility = $parent->owner;
     foreach ($audit_values as $audit_value) {
-      $internal = $datastream_version->createdDate;
       if ($audit_value['date'] == $datastream_version->createdDate) {
         $reponsibility = $audit_value['responsibility'];
       }

@@ -598,7 +598,7 @@ function islandora_display_repository_inaccessible_message() {
 function islandora_executable_available_message($path, $version = NULL, $required_version = NULL) {
   $available = is_executable($path);
   if ($available) {
-    $image = theme_image(array('path' => 'misc/watchdog-ok.png', 'attributes' => array()));
+    $image = theme('image', array('path' => 'misc/watchdog-ok.png', 'attributes' => array()));
     $message = t('Executable found at @path', array('@path' => $path));
     if ($version) {
       $message .= t('<br/>Version: @version', array('@version' => $version));
@@ -606,12 +606,12 @@ function islandora_executable_available_message($path, $version = NULL, $require
     if ($required_version) {
       $message .= t('<br/>Required Version: @version', array('@version' => $required_version));
       if (version_compare($version, $required_version) < 0) {
-        $image = theme_image(array('path' => 'misc/watchdog-error.png', 'attributes' => array()));
+        $image = theme('image', array('path' => 'misc/watchdog-error.png', 'attributes' => array()));
       }
     }
   }
   else {
-    $image = theme_image(array('path' => 'misc/watchdog-error.png', 'attributes' => array()));
+    $image = theme('image', array('path' => 'misc/watchdog-error.png', 'attributes' => array()));
     $message = t('Unable to locate executable at @path', array('@path' => $path));
   }
   return $image . $message;
@@ -629,11 +629,11 @@ function islandora_executable_available_message($path, $version = NULL, $require
 function islandora_directory_exists_message($path) {
   $available = is_dir($path);
   if ($available) {
-    $image = theme_image(array('path' => 'misc/watchdog-ok.png', 'attributes' => array()));
+    $image = theme('image', array('path' => 'misc/watchdog-ok.png', 'attributes' => array()));
     $message = t('Directory found at @path', array('@path' => $path));
   }
   else {
-    $image = theme_image(array('path' => 'misc/watchdog-error.png', 'attributes' => array()));
+    $image = theme('image', array('path' => 'misc/watchdog-error.png', 'attributes' => array()));
     $message = t('Unable to locate directory at @path', array('@path' => $path));
   }
   return $image . $message;

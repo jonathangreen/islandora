@@ -515,7 +515,7 @@ function islandora_ingest_form_add_step_context(array &$form, array $form_state)
   if (!isset($shared_storage['collection'])) {
     $shared_storage['collection'] = NULL;
   }
-  foreach ($shared_storage['models'] as $key => $value) {
+  foreach ($shared_storage['models'] as $value) {
     $fedora_cmodel = islandora_object_load($value);
     if ($fedora_cmodel) {
       if (is_array($shared_storage['collection'])) {
@@ -945,6 +945,7 @@ function islandora_ingest_form_load_include(array &$form_state) {
   if (isset($step['file']) && isset($step['module'])) {
     $matches = array();
     preg_match('/^(.*)\.(.*)$/', $step['file'], $matches);
+    // @codingStandardsIgnoreLine
     list($file, $name, $type) = $matches;
     form_load_include($form_state, $type, $step['module'], $name);
   }

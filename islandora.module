@@ -369,7 +369,7 @@ function islandora_menu() {
     'title' => 'Event Status',
     'page callback' => 'islandora_event_status',
     'type' => MENU_CALLBACK,
-    'access callback' => TRUE,
+    'access arguments' => array(ISLANDORA_VIEW_OBJECTS),
     'file' => 'includes/utilities.inc',
   );
   $items[ISLANDORA_CONTENT_MODELS_AUTOCOMPLETE] = array(
@@ -801,7 +801,7 @@ function islandora_user_access($object_or_datastream, array $permissions, array 
       }
     }
     else {
-      global $user;
+      $user = $GLOBALS['user'];
     }
   }
 
@@ -1151,7 +1151,6 @@ function islandora_default_islandora_printer_object(AbstractObject $object, $alt
   drupal_add_css($path . '/css/islandora.print.css');
 
   $islandora_object = islandora_object_load($object->id);
-  $repository = $islandora_object->repository;
 
   try {
     $dc = $islandora_object['DC']->content;
@@ -1672,7 +1671,7 @@ function islandora_object_access($op, $object, $user = NULL) {
     return FALSE;
   }
   if ($user === NULL) {
-    global $user;
+    $user = $GLOBALS['user'];
   }
 
   // Populate the cache on a miss.
@@ -1721,7 +1720,7 @@ function islandora_datastream_access($op, $datastream, $user = NULL) {
     return NULL;
   }
   if ($user === NULL) {
-    global $user;
+    $user = $GLOBALS['user'];
   }
 
   // Populate the cache on a miss.
@@ -1848,13 +1847,13 @@ function islandora_form_simpletest_test_form_alter(array &$form) {
   $filter_path = $configuration['drupal_filter_file'];
   $filter_status = is_writable($filter_path);
   if ($filter_status) {
-    $filter_status_message = theme_image(array('path' => 'misc/watchdog-ok.png', 'attributes' => array())) . " ";
+    $filter_status_message = theme('image', array('path' => 'misc/watchdog-ok.png', 'attributes' => array())) . " ";
     $filter_status_message .= t("Drupal filter at <strong>@filter_path</strong> is writable by the server.", array(
       '@filter_path' => $filter_path,
     ));
   }
   else {
-    $filter_status_message = theme_image(array('path' => 'misc/watchdog-error.png', 'attributes' => array())) . " ";
+    $filter_status_message = theme('image', array('path' => 'misc/watchdog-error.png', 'attributes' => array())) . " ";
     $filter_status_message .= t("Drupal filter at <strong>@filter_path</strong> is not writable by the server. Please make sure your webserver has permission to write to the Drupal filter. If the path given is incorrect, you will need to change it in your server's test config file, located in the Islandora module's 'tests' folder as test_config.ini or default.test_config.ini.", array(
       '@filter_path' => $filter_path,
     ));
@@ -2004,7 +2003,7 @@ function islandora_islandora_datastream_access($op, AbstractDatastream $datastre
 function islandora_find_package($package_name) {
   $results = system_get_info('module');
   $found = FALSE;
-  foreach ($results as $name => $values) {
+  foreach ($results as $values) {
     if ($values['package'] == $package_name) {
       $found = TRUE;
       break;

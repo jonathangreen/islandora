@@ -943,5 +943,5 @@ function hook_islandora_breadcrumbs_backends() {
  */
 function callback_islandora_breadcrumbs_backends(AbstractObject $object) {
   // Do something to get an array of breadcrumb links for $object, root first.
-  return array($root_link, $collection_link, $object_link);
+  return array('root_link', 'collection_link', 'object_link');
 }

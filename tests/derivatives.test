@@ -45,16 +45,6 @@ class IslandoraDerivativesTestCase extends IslandoraWebTestCase {
   }
 
   /**
-   * Free any objects/resources created for this test.
-   *
-   * @see IslandoraWebTestCase::tearDown()
-   */
-  public function tearDown() {
-    $tuque = islandora_get_tuque_connection();
-    parent::tearDown();
-  }
-
-  /**
    * Tests that the islandora_islandora_object_ingested hook gets fired.
    */
   public function testDerivativeOnIngest() {

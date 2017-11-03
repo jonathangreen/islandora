@@ -71,7 +71,7 @@ class IslandoraTuque {
    */
   public function __construct($user = NULL, $url = NULL) {
     if (!isset($user)) {
-      global $user;
+      $user = $GLOBALS['user'];;
     }
 
     if ($user->uid == 0) {

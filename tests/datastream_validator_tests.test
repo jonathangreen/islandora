@@ -8,6 +8,7 @@
 /**
  * A test DatastreamValidator for the DatastreamValidatorResultTestCase.
  */
+// @codingStandardsIgnoreLine
 class TestDatastreamValidator extends DatastreamValidator {
 
   /**
@@ -29,6 +30,7 @@ class TestDatastreamValidator extends DatastreamValidator {
 /**
  * Tests the ability of DatastreamValidators to produce correct results.
  */
+// @codingStandardsIgnoreLine
 class DatastreamValidatorResultTestCase extends IslandoraWebTestCase {
 
   /**
@@ -121,6 +123,7 @@ class DatastreamValidatorResultTestCase extends IslandoraWebTestCase {
 /**
  * Procedurally generated tests for DatastreamValidators.
  */
+// @codingStandardsIgnoreLine
 class PrefixDatastreamValidatorTestCase extends IslandoraWebTestCase {
 
   /**

@@ -17,4 +17,4 @@
  * this is the case for all dc elements.
  */
 ?>
-<?php print (theme_table($variables['datastream_table'])); ?>
+<?php print (theme('table', $variables['datastream_table'])); ?>

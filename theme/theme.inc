@@ -11,7 +11,6 @@
 function template_preprocess_islandora_default_edit(array &$variables) {
   global $base_url;
   $islandora_object = $variables['islandora_object'];
-  $datastreams = array();
   $variables['islandora_editmetadata_url'] = $base_url . '/islandora/edit_form/' . $islandora_object->id;
   module_load_include('inc', 'islandora', 'includes/datastream');
   module_load_include('inc', 'islandora', 'includes/utilities');
@@ -125,7 +124,6 @@ function template_preprocess_islandora_default(&$variables) {
   $datastreams = array();
   foreach ($islandora_object as $ds) {
     try {
-      $pid = $islandora_object->id;
       $id = $ds->id;
       $label = $ds->label;
       $download_path = islandora_datastream_get_url($ds, 'download');

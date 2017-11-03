@@ -37,7 +37,7 @@ function islandora_get_object_token($pid, $dsid, $uses = 1) {
   global $user;
   $time = time();
   $token = bin2hex(drupal_random_bytes(32));
-  $id = db_insert("islandora_authtokens")->fields(
+  db_insert("islandora_authtokens")->fields(
     array(
       'token' => $token,
       'uid' => $user->uid,
