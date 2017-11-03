@@ -111,8 +111,8 @@ class DatastreamValidatorResultTestCase extends IslandoraWebTestCase {
       $this->assertTrue(substr($first_caller['file'], -48) === substr($second_caller['file'], -48), "Fail caller file matches the pass caller file.", 'Islandora');
       $this->assertTrue($first_caller['function'] === 'TestDatastreamValidator->assertSomethingSuccessfully()', "Correct pass caller function returned (actual: {$first_caller['function']}; expected: TestDatastreamValidator->assertSomethingSuccessfully()).", 'Islandora');
       $this->assertTrue($second_caller['function'] === 'TestDatastreamValidator->assertSomethingFailed()', "Correct fail caller function returned (actual: {$second_caller['function']}; expected: TestDatastreamValidator->assertSomethingFailed()).", 'Islandora');
-      $this->assertTrue($first_caller['line'] === 16, "Correct pass line number returned (actual: {$first_caller['line']}; expected: 16).", 'Islandora');
-      $this->assertTrue($second_caller['line'] === 23, "Correct fail line number returned (actual: {$second_caller['line']}; expected: 23).", 'Islandora');
+      $this->assertTrue($first_caller['line'] === 18, "Correct pass line number returned (actual: {$first_caller['line']}; expected: 18).", 'Islandora');
+      $this->assertTrue($second_caller['line'] === 25, "Correct fail line number returned (actual: {$second_caller['line']}; expected: 25).", 'Islandora');
     }
   }
 
