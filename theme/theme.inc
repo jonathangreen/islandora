@@ -168,7 +168,7 @@ function template_preprocess_islandora_default(&$variables) {
  */
 function template_preprocess_islandora_object_print(array &$variables) {
   // Apply the print CSS in non print context.
-  $only_print_media = function($o) {
+  $only_print_media = function ($o) {
     return $o['media'] == 'print';
   };
   $css = array_filter(drupal_add_css(), $only_print_media);
@@ -313,8 +313,6 @@ function islandora_objects_object_mapper($object_id) {
  *
  * A variant of "islandora_objects" which accepts a subset of object to theme.
  *
- * @see template_preprocess_islandora_objects()
- *
  * @param array $variables
  *   An associative array containing:
  *   - objects: An array of PIDs to render for the given page.
@@ -333,8 +331,10 @@ function islandora_objects_object_mapper($object_id) {
  *     be toggled between a "grid" and "list" view.
  *   - pager: A renderable array for the pager.
  *   - content: A renderable array for the main content of the page.
+ *
+ * @see template_preprocess_islandora_objects()
  */
-function template_preprocess_islandora_objects_subset(&$variables) {
+function template_preprocess_islandora_objects_subset(array &$variables) {
   $display = (empty($_GET['display'])) ? $variables['display'] : $_GET['display'];
   $grid_display = $display == 'grid';
   $list_display = !$grid_display;

@@ -5,6 +5,9 @@
  * Very basic entity controller.
  */
 
+/**
+ * Very basic entity controller for Islandora.
+ */
 class IslandoraObjectEntityController implements DrupalEntityControllerInterface {
 
   /**
@@ -28,7 +31,7 @@ class IslandoraObjectEntityController implements DrupalEntityControllerInterface
    * @return array
    *   An array of loaded objects.
    */
-  public function load($ids = array(), $conditions = array()) {
+  public function load(array $ids = array(), array $conditions = array()) {
     if (!empty($conditions)) {
       // TODO: Allow loading by specifying IDs in the condition.
       throw new Exception('Conditions not implemented.');
@@ -54,4 +57,5 @@ class IslandoraObjectEntityController implements DrupalEntityControllerInterface
   public function resetCache(array $ids = NULL) {
     // no-op.
   }
+
 }

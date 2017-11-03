@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Tests for things that test tests. Madness.
@@ -22,6 +23,7 @@ class TestDatastreamValidator extends DatastreamValidator {
   protected function assertSomethingFailed() {
     $this->addResult(FALSE, 'boo you failed', $this->getAssertionCall());
   }
+
 }
 
 /**
@@ -222,7 +224,7 @@ class PrefixDatastreamValidatorTestCase extends IslandoraWebTestCase {
       'dsid' => $prefix,
       'path' => $this->path . $filename,
       'control_group' => 'M',
-      ),
+    ),
     );
     $object = $this->ingestConstructedObject(array(), $datastreams);
     return $object;
@@ -273,4 +275,5 @@ class PrefixDatastreamValidatorTestCase extends IslandoraWebTestCase {
       }
     }
   }
+
 }
