@@ -31,7 +31,9 @@ class IslandoraObjectEntityController implements DrupalEntityControllerInterface
    * @return array
    *   An array of loaded objects.
    */
-  public function load(array $ids = array(), array $conditions = array()) {
+  // @codingStandardsIgnoreStart
+  public function load($ids = array(), $conditions = array()) {
+  // @codingStandardsIgnoreEnd
     if (!empty($conditions)) {
       // TODO: Allow loading by specifying IDs in the condition.
       throw new Exception('Conditions not implemented.');
