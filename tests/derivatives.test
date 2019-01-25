@@ -11,6 +11,9 @@
  * To make sense of these tests reference islandora_derivatives_test.module.
  */
 
+/**
+ * Derivative hook tests.
+ */
 class IslandoraDerivativesTestCase extends IslandoraWebTestCase {
 
   /**
@@ -334,4 +337,5 @@ class IslandoraDerivativesTestCase extends IslandoraWebTestCase {
     $object->ingestDatastream($ds);
     return $object;
   }
+
 }
