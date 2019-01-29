@@ -64,7 +64,7 @@ else
 fi
 
 # PHP Copy-Paste Detection installation.
-composer global --dev sebastian/phpcpd
+composer global require --dev sebastian/phpcpd
 if [ -f "$HOME/.config/composer/vendor/bin/phpcpd" ]; then
   sudo ln -s $HOME/.config/composer/vendor/bin/phpcpd /usr/local/bin/phpcpd
 elif [ -f "$HOME/.composer/vendor/bin/phpcpd" ]; then
