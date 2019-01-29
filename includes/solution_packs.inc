@@ -789,9 +789,9 @@ function theme_islandora_viewers_table($variables) {
  */
 function islandora_get_viewer($params = NULL, $variable_id = NULL, AbstractObject $fedora_object = NULL) {
   $settings = variable_get($variable_id, array());
-  if (!empty($settings) and $settings['default'] !== 'none') {
+  if (!empty($settings) && $settings['default'] !== 'none') {
     $viewer_id = islandora_get_viewer_id($variable_id);
-    if ($viewer_id and $params !== NULL) {
+    if ($viewer_id && $params !== NULL) {
       $callback = islandora_get_viewer_callback($viewer_id);
       if (function_exists($callback)) {
         return $callback($params, $fedora_object);

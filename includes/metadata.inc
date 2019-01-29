@@ -107,7 +107,7 @@ function islandora_metadata_display_form(array $form, array $form_state) {
       );
       $form['viewers']['configuration'][$name] = array(
         '#type' => 'item',
-        '#markup' => (isset($profile['configuration']) and $profile['configuration'] != '') ? l(t('configure'), $profile['configuration']) : '',
+        '#markup' => (isset($profile['configuration']) && $profile['configuration'] != '') ? l(t('configure'), $profile['configuration']) : '',
       );
     }
     $form['viewers']['default'] = array(
