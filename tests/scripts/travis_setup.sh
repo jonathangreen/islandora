@@ -64,9 +64,14 @@ else
 fi
 
 # PHP Copy-Paste Detection installation.
-wget http://alpha.library.yorku.ca/phpcpd.phar
-sudo mv phpcpd.phar /usr/local/bin/phpcpd
-sudo chmod +x /usr/local/bin/phpcpd
+composer global --dev sebastian/phpcpd
+if [ -f "$HOME/.config/composer/vendor/bin/phpcpd" ]; then
+  sudo ln -s $HOME/.config/composer/vendor/bin/phpcpd /usr/local/bin/phpcpd
+elif [ -f "$HOME/.composer/vendor/bin/phpcpd" ]; then
+  sudo ln -s $HOME/.composer/vendor/bin/phpcpd /usr/local/bin/phpcpd
+else
+  echo "Did not find phpcpd"
+fi
 
 # Drupal installation.
 phpenv rehash
