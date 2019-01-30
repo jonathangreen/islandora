@@ -29,13 +29,6 @@ env:
   - FEDORA_VERSION="3.7.0"
   - FEDORA_VERSION="3.8.1"
 
-branches:
-  only:
-    - /^7.x/
-  global:
-    # This key is unique to the Islandora/islandora repository; logging will
-    # fail on forked repositories unless a new unique key is generated for them.
-    - secure: "nTv2Zb/qKlECK+xE5ahbfXI9ZZbf2ZMd796q7oPlTxUwvu6nomHnUOjJATl6tq2cj23PyJ89Jlgl5cMZ5h0QMUzYpN5hPyY6oCJxWgFamFaE3bv5E/rBd1f6WVTJW7S4UKn8Mr9R2PrX+ZxQZGVIigAfR8VfhQuP8PcuO5eMLBk="
 before_install:
   - export ISLANDORA_DIR=$TRAVIS_BUILD_DIR
   - $TRAVIS_BUILD_DIR/tests/scripts/travis_setup.sh
@@ -46,7 +39,3 @@ before_script:
 script:
   - $ISLANDORA_DIR/tests/scripts/travis_scripts.sh
   - $ISLANDORA_DIR/tests/scripts/run_tests.sh "Islandora"
-after_failure:
-  - $ISLANDORA_DIR/tests/scripts/travis_after_failure.sh
-notifications:
-  irc: "irc.freenode.org#islandora"
