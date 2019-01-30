@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Lint
 find $TRAVIS_BUILD_DIR -type f \( -name '*.php' -o -name '*.inc' -o -name '*.module' -o -name '*.install' -o -name '*.test' \) -exec php -l {} \;
