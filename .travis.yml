@@ -2,27 +2,9 @@ sudo: required
 dist: trusty
 language: php
 
-matrix:
-  include:
-  #5.3.3 Ubuntu Precise exceptions
-    - php: 5.3.3
-      dist: precise
-      env: FEDORA_VERSION="3.5"
-    - php: 5.3.3
-      dist: precise
-      env: FEDORA_VERSION="3.6.2"
-    - php: 5.3.3
-      dist: precise
-      env: FEDORA_VERSION="3.7.0"
-    - php: 5.3.3
-      dist: precise
-      env: FEDORA_VERSION="3.8.1"
 php:
   - 7.1
 env:
-  - FEDORA_VERSION="3.5"
-  - FEDORA_VERSION="3.6.2"
-  - FEDORA_VERSION="3.7.0"
   - FEDORA_VERSION="3.8.1"
 
 before_install:
